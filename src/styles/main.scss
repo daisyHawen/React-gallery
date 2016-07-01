@@ -1,21 +1,64 @@
 /* Base Application Styles */
+
+// body {
+//   color: #fff;
+//   background: #222;
+// }
+// .index img {
+//   margin: 40px auto;
+//   border-radius: 4px;
+//   background: #fff;
+//   display: block;
+// }
+// .index .notice {
+//   margin: 20px auto;
+//   padding: 15px 0;
+//   text-align: center;
+//   border: 1px solid #000;
+//   border-width: 1px 0;
+//   background: #666;
+// }
+html,
 body {
-  color: #fff;
-  background: #222;
+    background: #222;
+    width: 100%;
+    height: 100%;
 }
 
-.index img {
-  margin: 40px auto;
-  border-radius: 4px;
-  background: #fff;
-  display: block;
+.content {
+    height: 100%;
+    width: 100%;
 }
 
-.index .notice {
-  margin: 20px auto;
-  padding: 15px 0;
-  text-align: center;
-  border: 1px solid #000;
-  border-width: 1px 0;
-  background: #666;
+
+/*修饰舞台结构--start*/
+
+.stage {
+    position: relative;
+    width: 100%;
+    height: 680px;
+}
+
+
+/*stage --end*/
+
+
+/*image --start*/
+.img-sec{
+  position:relative;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background-color:#ddd;
+}
+
+/*image --end*/
+/*controlller --start*/
+.controller-nav{
+  position:absolute;
+  left:0;
+  bottom:30px;
+  z-index:101;
+  width:100%;
+  text-align:center;
 }
