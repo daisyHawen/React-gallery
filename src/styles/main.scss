@@ -44,21 +44,49 @@ body {
 
 
 /*image --start*/
-.img-sec{
-  position:relative;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background-color:#ddd;
+
+.img-sec {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: #ddd;
+    @at-root {
+        .img-figure {
+            width: 320px;
+            height: 360px;
+            margin: 0;
+            padding: 40px;
+            background-color: #fff;
+            box-sizing: border-box;
+            img {
+                height: 240px;
+                width: 240px;
+
+            }
+        }
+        figcaption{
+          text-align:center;
+          .img-tittle{
+                  margin:20px 0 0 0;
+                  color:#a7a0a2;
+                  font-size:16px;
+                }
+        }
+    }
 }
 
+
 /*image --end*/
+
+
 /*controlller --start*/
-.controller-nav{
-  position:absolute;
-  left:0;
-  bottom:30px;
-  z-index:101;
-  width:100%;
-  text-align:center;
+
+.controller-nav {
+    position: absolute;
+    left: 0;
+    bottom: 30px;
+    z-index: 101;
+    width: 100%;
+    text-align: center;
 }
