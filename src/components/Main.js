@@ -18,7 +18,7 @@ function genImageURL(imageDataArr) {
 		imageDataArr[i] = singleImageData;
 	}
 	return imageDataArr; // body...
-};
+}
 imageDatas = genImageURL(imageDatas);
 // console.log(imageDatas);
 
@@ -52,34 +52,88 @@ var GalleryByReactApp = React.createClass({
 			topY: [0, 0]
 		}
 	},
+	/*重新布局所有图片
+	指定居中哪个图片*/
+	rearrange: function(centerIndex) {
+		var imgsArrageArr = this.state.imgsArrageArr,
+			Constant = this.Constant,
+			centerPos = Constant.centerPros,
+			hPosRange = Constant.hPosRange,
+			vPosRange = Constant.vPosRange,
+			hPosRangeLeftSecX = hPosRange.leftSecX,
+			hPosRangeRightSecX = hPosRange.rightSecX,
+			hPosRangeY = hPosRange.y,
+			vPosRangeTopY = vPosRange.topY,
+			vPosRangeX = vPosRange.x,
+			imgsArrageArr = [],
+			topImgNum = Math.ceil(Math.random() * 2), //取一个或者不取
+			topImgSpliceIndex = 0;
+		imgsArrageCenterArr = imgsArrageArr.splice(centerIndex, 1);
+
+	},
+	getInitialState: function() {
+		return {
+			imgsArrageArr: [{
+				pos: {
+					left: '0',
+					top: '0'
+				}
+			}]
+		}
+	},
 	//组建加载后，为每个图片计算其位置的范围
 	componentDidMount: function() {
+		// 首先拿到舞台的大小
 		var stageDOM = ReactDOM.findDOMNode(this.refs.stage),
 			stageW = stageDOM.scrollWidth,
 			stageH = stageDOM.scrollHeight,
 			halfStageW = Math.ceil(stageW / 2),
 			halfStageH = Math.ceil(stageH / 2);
-		//拿到一个imageFigure的大小
+
+		// 拿到一个imageFigure的大小
 		var imgFigureDOM = ReactDOM.findDOMNode(this.refs.imgFigure0),
 			imgW = imgFigureDOM.scrollWidth,
 			imgH = imgFigureDOM.scrollHeight,
 			halfImgW = Math.ceil(imgW / 2),
 			halfImgH = Math.ceil(imgH / 2);
-		//计算中心图片的位置点
-		this.Constant.centerPros = {
-			left: halfStageH - halfImgW,
+
+		// 计算中心图片的位置点
+		this.Constant.centerPos = {
+			left: halfStageW - halfImgW,
 			top: halfStageH - halfImgH
-		}
-		this.Constant.hPosRange.leftSecX[0] = -halfImgH;
+		};
+
+		// 计算左侧，右侧区域图片排布位置的取值范围
+		this.Constant.hPosRange.leftSecX[0] = -halfImgW;
+		this.Constant.hPosRange.leftSecX[1] = halfStageW - halfImgW * 3;
+		this.Constant.hPosRange.rightSecX[0] = halfStageW + halfImgW;
+		this.Constant.hPosRange.rightSecX[1] = stageW - halfImgW;
+		this.Constant.hPosRange.y[0] = -halfImgH;
+		this.Constant.hPosRange.y[1] = stageH - halfImgH;
+
+		// 计算上侧区域图片排布位置的取值范围
+		this.Constant.vPosRange.topY[0] = -halfImgH;
+		this.Constant.vPosRange.topY[1] = halfStageH - halfImgH * 3;
+		this.Constant.vPosRange.x[0] = halfStageW - imgW;
+		this.Constant.vPosRange.x[1] = halfStageW;
+
+		this.rearrange(0);
 
 	},
 	render() {
 		let controllerUnits = [],
 			imgFigures = [];
-		imageDatas.forEach((item, index) => {
+		imageDatas.forEach(function(item, index) {
+			if (!this.state.imgsArrageArr[index]) {
+				this.state.imgsArrageArr[index] = {
+					pos: {
+						left: '0',
+						top: '0'
+					}
+				}
+			}
 			imgFigures.push(<ImgFigure data={item} key={index} ref={'imgFigure'+index}/>);
-
-		});
+		}.bind(this));
 		return (
 			<section className="stage" refs="stage">
 		<section className="img-sec">

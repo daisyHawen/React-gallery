@@ -23,13 +23,18 @@ function getDefaultModules() {
     }],
     loaders: [{
         test: /\.css$/,
-        loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version","Firefox15"]}'
-      }, {
+        loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 version'
+      },
+      // {
+      //   test: /\.css$/,
+      //   loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions'
+      // }, 
+      {
         test: /\.sass/,
         loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
       }, {
         test: /\.scss/,
-        loader: 'style-loader!css-loader!autoprefixer-loader?{browsers:["last 2 version","Firefox15"]}!sass-loader?outputStyle=expanded'
+        loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions!sass-loader?outputStyle=expanded'
       }, {
         test: /\.less/,
         loader: 'style-loader!css-loader!less-loader'
@@ -37,10 +42,10 @@ function getDefaultModules() {
         test: /\.styl/,
         loader: 'style-loader!css-loader!stylus-loader'
       },
-    {
-      test: /\.json$/,
-      loader: 'json-loader'
-    },
+      // {
+      //   test: /\.json$/,
+      //   loader: 'json-loader'
+      // },
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
         loader: 'url-loader?limit=8192'
