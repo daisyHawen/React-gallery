@@ -27,8 +27,14 @@ function getRangeRandom(low, high) {
 }
 var ImgFigure = React.createClass({
 		render() {
+			var styObj = {};
+			/*如果props属性中指定了这张图片的位置，则使用*/
+			if (this.props.arrange.pos) {
+				styObj = this.props.arrange.pos;
+
+			}
 			return (
-				<figure className='img-figure'>
+				<figure className='img-figure' styles={styObj}>
 			<img src={this.props.data.imageURL} alt={this.props.data.tittle}/>
 			<figcaption>
 			<h2 className='img-tittle'>{this.props.data.title}</h2>
@@ -68,14 +74,19 @@ var GalleryByReactApp = React.createClass({
 			hPosRangeY = hPosRange.y,
 			vPosRangeTopY = vPosRange.topY,
 			vPosRangeX = vPosRange.x,
-			imgsArrageArr = [],
+			imgsArrangeTopArr = [],
 			topImgNum = Math.ceil(Math.random() * 2), //取一个或者不取
-			topImgSpliceIndex = 0;
+			topImgSpliceIndex = 0,
 
-		imgsArrageCenterArr = imgsArrageArr.splice(centerIndex, 1);
-		//居中centerIndex的图片
+			imgsArrangeCenterArr = imgsArrageArr.splice(centerIndex, 1);
 
-		imgsArrageArrCenterArr[0].pos = centerPos;
+		// 首先居中 centerIndex 的图片, 居中的 centerIndex 的图片不需要旋转
+		imgsArrangeCenterArr[0] = {
+			pos: centerPos,
+			rotate: 0,
+			isCenter: true
+		};
+
 
 		//取出要布局上侧的图片的状态信息
 		topImgSpliceIndex = Math.ceil(Math.random * ((imgsArrageArr.length) - topImgNum));
@@ -101,8 +112,18 @@ var GalleryByReactApp = React.createClass({
 			}
 		}
 		/*位置信息处理完毕*/
-		/*test*/
 
+		/*用于填充上侧区域的图片信息塞回去*/
+		if (imgsArrangeTopArr && imgsArrangeTopArr[0]) {
+			imgsArrageArr.splice(topImgSpliceIndex, 0, imgsArrangeTopArr[0]);
+		}
+		/*用于填充中间区域的图片信息塞回去*/
+		imgsArrageArr.splice(centerIndex, 0, imgsArrangeCenterArr[0]);
+		/*设置state，触发重新渲染*/
+		this.setState({
+			imgsArrage: imgsArrageArr
+		});
+		/*随意生成的值设置完毕*/
 	},
 	getInitialState: function() {
 		return {
@@ -165,7 +186,8 @@ var GalleryByReactApp = React.createClass({
 					}
 				}
 			}
-			imgFigures.push(<ImgFigure data={item} key={index} ref={'imgFigure'+index}/>);
+			/*把图片的状态信息传递给imgFigure*/
+			imgFigures.push(<ImgFigure data={item} key={index} ref={'imgFigure'+index} arrange={this.state.imgsArrageArr[index]}/>);
 		}.bind(this));
 		return (
 			<section className="stage" refs="stage">
