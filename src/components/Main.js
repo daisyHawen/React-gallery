@@ -2,11 +2,11 @@ require('normalize.css/normalize.css');
 require('styles/main.scss');
 
 import React from 'react';
-
+import ReactDOM from 'react-dom'
 // let yeomanImage = require('../images/yeoman.png');
 //获取图片路径
 // let imageDatas = require('../data/imageDatas.json');
-var ReactDOM = require('react-dom');
+
 let imageDatas = require('json!../data/imageDatas.json');
 // 只调用一次的函数，可以采用自执行的方式来执行
 
@@ -136,13 +136,14 @@ var GalleryByReactApp = React.createClass({
 		}
 	},
 	//组建加载后，为每个图片计算其位置的范围
-	componentDidMount: function() {
+	componentDidMound() {
 		// 首先拿到舞台的大小
-		var stageDOM = ReactDOM.findDOMNode(this.refs.stage),
-			stageW = stageDOM.scrollWidth,
+		var stageDOM = ReactDOM.findDOMNode(this.refs.stage);
+		var stageW = stageDOM.scrollWidth,
 			stageH = stageDOM.scrollHeight,
 			halfStageW = Math.ceil(stageW / 2),
 			halfStageH = Math.ceil(stageH / 2);
+
 
 		// 拿到一个imageFigure的大小
 		var imgFigureDOM = ReactDOM.findDOMNode(this.refs.imgFigure0),
