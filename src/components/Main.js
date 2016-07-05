@@ -9,6 +9,7 @@ import React from 'react';
 var ReactDOM = require('react-dom');
 let imageDatas = require('json!../data/imageDatas.json');
 // 只调用一次的函数，可以采用自执行的方式来执行
+
 // 把所有的图片名转换为图片路径
 function genImageURL(imageDataArr) {
 	for (var i = 0, j = imageDataArr.length; i < j; i++) {
@@ -20,8 +21,10 @@ function genImageURL(imageDataArr) {
 	return imageDataArr; // body...
 }
 imageDatas = genImageURL(imageDatas);
-// console.log(imageDatas);
-
+/*获取区间内的随机值*/
+function getRangeRandom(low, high) {
+	return Math.ceil(Math.random() * (high - low) + low);
+}
 var ImgFigure = React.createClass({
 		render() {
 			return (
@@ -68,7 +71,36 @@ var GalleryByReactApp = React.createClass({
 			imgsArrageArr = [],
 			topImgNum = Math.ceil(Math.random() * 2), //取一个或者不取
 			topImgSpliceIndex = 0;
+
 		imgsArrageCenterArr = imgsArrageArr.splice(centerIndex, 1);
+		//居中centerIndex的图片
+
+		imgsArrageArrCenterArr[0].pos = centerPos;
+
+		//取出要布局上侧的图片的状态信息
+		topImgSpliceIndex = Math.ceil(Math.random * ((imgsArrageArr.length) - topImgNum));
+		imgsArrangeTopArr = imgsArrageArr.splice(topImgSpliceIndex.topImgNum);
+		//布局位于上侧的图片
+		imgsArrangeTopArr.forEach(function(value, index) {
+			imgsArrangeTopArr[index].pos = {
+				top: getRangeRandom(vPosRangeTopY[0], vPosRangeTopY[1]),
+				left: getRangeRandom(vPosRangeX[0], vPosRangeX[1])
+			}
+		});
+		/*布局两侧的图片信息*/
+		for (var i = 0, j = imgsArrageArr.length, k = j / 2; i < j; i++) {
+			var hPosRangeLORX = null;
+			if (i < k) {
+				hPosRangeLORX = hPosRangeLeftSecX;
+			} else {
+				hPosRangeLORX = hPosRangeRightSecX;
+			}
+			imgsArrageArr[i].pos = {
+				top: getRangeRandom(hPosRangeY[0], hPosRangeY[1]),
+				left: getRangeRandom(hPosRangeLORX[0], hPosRangeLORX[1])
+			}
+		}
+		/*位置信息处理完毕*/
 
 	},
 	getInitialState: function() {
