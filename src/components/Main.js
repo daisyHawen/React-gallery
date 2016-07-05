@@ -101,6 +101,7 @@ var GalleryByReactApp = React.createClass({
 			}
 		}
 		/*位置信息处理完毕*/
+		/*test*/
 
 	},
 	getInitialState: function() {
