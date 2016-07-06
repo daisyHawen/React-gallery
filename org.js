@@ -128,6 +128,12 @@ var ControllerUnit = React.createClass({
   }
 });
 
+var Footer = React.createClass({
+  render: function() {
+    return (<footer>GalleryByReactApp-daisyHawen</footer>)
+  }
+})
+
 var GalleryByReactApp = React.createClass({
   Constant: {
     centerPos: {
@@ -340,6 +346,7 @@ var GalleryByReactApp = React.createClass({
             <nav className="controller-nav">
                 {controllerUnits}
             </nav>
+            <Footer/>
         </section>
     );
   }
