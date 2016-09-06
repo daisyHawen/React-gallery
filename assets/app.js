@@ -9,7 +9,7 @@
 		return e[r].call(o.exports, o, o.exports, t), o.loaded = !0, o.exports
 	}
 	var n = {};
-	return t.m = e, t.c = n, t.p = "/assets/", t(0)
+	return t.m = e, t.c = n, t.p = "./assets/", t(0)
 }([function(e, t, n) {
 	"use strict";
 
@@ -8274,13 +8274,13 @@
 		}()
 	}
 	var i = {
-		".../1.jpg": 209,
-		".../10.jpg": 210,
-		".../11.jpg": 211,
-		".../12.jpg": 212,
-		".../13.jpg": 213,
-		".../14.jpg": 214,
-		".../15.jpg": 215,
+		"../1.jpg": 209,
+		"../10.jpg": 210,
+		"../11.jpg": 211,
+		"../12.jpg": 212,
+		"../13.jpg": 213,
+		"../14.jpg": 214,
+		"../15.jpg": 215,
 		"../16.jpg": 216,
 		"../2.jpg": 217,
 		"../3.jpg": 218,
